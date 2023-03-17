@@ -1,34 +1,10 @@
-<script setup lang="ts">
-ElMessageBox({ message: '123' })
-</script>
-  
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <!-- 直接使用图标 -->
-    <i-ep-menu />
-    <!-- 嵌套使用图标 -->
-    <el-icon><i-ep-menu /></el-icon>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-    {{ $t('message.formI18nLabel.autograph') }}
-  </div>
+  <Login />
 </template>
-
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+<script setup lang="ts">
+import { defineAsyncComponent } from 'vue'
+// 引入组件
+const Login = defineAsyncComponent(() => import('@/views/login/index.vue'))
+</script>
+<style scoped lang="scss">
 </style>

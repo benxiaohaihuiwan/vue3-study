@@ -1,6 +1,8 @@
 import { createApp } from 'vue'
-import '/@/style.css'
-import App from '/@/App.vue';
-import i18n  from '/@/i18n/index';
-const app = createApp(App);
-app.use(i18n).mount('#app')
+import App from '@/App.vue'
+import i18n  from '@/i18n/index.js'
+import pinia from '@/stores/index.js'
+import '@/theme/index.scss'
+const app = createApp(App)
+
+app.use(pinia).use(i18n).mount('#app')

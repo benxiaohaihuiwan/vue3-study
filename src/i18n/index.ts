@@ -20,15 +20,13 @@ const element = { en: enLocale, 'zh-cn': zhcnLocale };
 const itemize = { en: [], 'zh-cn': [] };
 const modules: Record<string, any> = import.meta.glob('./**/*.ts', { eager: true });
 
-
 // 对自动引入的 modules 进行分类 en、zh
 // https://vitejs.cn/vite3-cn/guide/features.html#glob-import
 for (const path in modules) {
 	const key = path.match(/(\S+)\/(\S+).ts/);
-	if (itemize[key![2]]) itemize[key![2]].push(modules[path].default);
-	else itemize[key![2]] = modules[path];
+	if (itemize[key[2]]) itemize[key[2]].push(modules[path].default);
+	else itemize[key[2]] = modules[path];
 }
-
 // 合并数组对象（非标准数组对象，数组中对象的每项 key、value 都不同）
 function mergeArrObj<T>(list: T, key: string) {
 	let obj = {};

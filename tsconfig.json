@@ -5,14 +5,19 @@
     "useDefineForClassFields": true,
     "module": "ESNext",
     "moduleResolution": "Node",
-    "strict": true,
+    "strict": false,
     "jsx": "preserve",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
-    "skipLibCheck": true,
-    "noEmit": true
+    "skipLibCheck": true, // 是否跳过node_modules目录检测
+    "noEmit": true,
+    "types": ["vite/client"],
+    "baseUrl": "." ,
+    "paths": {
+			"@/*": ["src/*"]
+		}
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue","src/types/auto-imports.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
