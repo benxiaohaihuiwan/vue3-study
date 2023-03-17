@@ -14,6 +14,7 @@ ElMessageBox({ message: '123' })
     <a href="https://vuejs.org/" target="_blank">
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
+    {{ $t('message.formI18nLabel.autograph') }}
   </div>
 </template>
 
