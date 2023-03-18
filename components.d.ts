@@ -9,8 +9,15 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ElForm: typeof import('element-plus/es')['ElForm']
+    ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElIcon: typeof import('element-plus/es')['ElIcon']
+    ElInput: typeof import('element-plus/es')['ElInput']
+    ElTabPane: typeof import('element-plus/es')['ElTabPane']
+    ElTabs: typeof import('element-plus/es')['ElTabs']
+    ElUser: typeof import('element-plus/es')['ElUser']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     IEpMenu: typeof import('~icons/ep/menu')['default']
+    SvgIcon: typeof import('./src/components/svgIcon/index.vue')['default']
   }
 }
