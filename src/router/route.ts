@@ -40,7 +40,7 @@ declare module 'vue-router' {
   {
 		path: '/',
 		name: '/',
-		component: () => import('/@/layout/index.vue'),
+		component: () => import('@/layout/index.vue'),
 		redirect: '/home',
 		meta: {
 			isKeepAlive: true,

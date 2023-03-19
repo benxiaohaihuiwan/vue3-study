@@ -65,6 +65,7 @@ const viteConfig = defineConfig((mode: ConfigEnv) => {
     define: {
       __VUE_I18N_LEGACY_API__: JSON.stringify(false),
       __VUE_I18N_FULL_INSTALL__: JSON.stringify(false),
+      __NEXT_NAME__: JSON.stringify(process.env.npm_package_name)
     },
   }
 })
