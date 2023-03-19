@@ -3,7 +3,9 @@ import App from '@/App.vue'
 import i18n  from '@/i18n/index.ts'
 import pinia from '@/stores/index.js'
 import '@/theme/index.scss'
-import other from '@/utils/other';
+import other from '@/utils/other'
+import router from '@/router'
+
 const app = createApp(App)
 other.elSvg(app);
-app.use(pinia).use(i18n).mount('#app')
+app.use(pinia).use(i18n).use(router).mount('#app')
