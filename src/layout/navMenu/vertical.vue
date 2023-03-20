@@ -99,6 +99,7 @@ const onALinkClick = (val: RouteItem) => {
 
 // 页面加载时
 onMounted(() => {
+  console.log('---setParentHighlight---:', setParentHighlight(route), menuList)
   state.defaultActive = setParentHighlight(route)
 })
 

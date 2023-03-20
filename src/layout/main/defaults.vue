@@ -1,12 +1,12 @@
 <template>
   <el-container class="layout-container">
     <LayoutAside />
-    <!-- <el-container class="layout-container-view h100">
-			<el-scrollbar ref="layoutScrollbarRef" class="layout-backtop">
-				<LayoutHeader />
-				<LayoutMain ref="layoutMainRef" />
-			</el-scrollbar>
-		</el-container> -->
+    <el-container class="layout-container-view h100">
+      <el-scrollbar ref="layoutScrollbarRef" class="layout-backtop">
+        <LayoutHeader />
+        <!-- <LayoutMain ref="layoutMainRef" /> -->
+      </el-scrollbar>
+    </el-container>
   </el-container>
 </template>
 
@@ -15,17 +15,19 @@ import { defineAsyncComponent, watch, onMounted, nextTick, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useThemeConfig } from '@/stores/themeConfig'
-// import { NextLoading } from '@/utils/loading'
+import { NextLoading } from '@/utils/loading'
 
 // 引入组件
 const LayoutAside = defineAsyncComponent(
   () => import('@/layout/component/aside.vue')
 )
-// const LayoutHeader = defineAsyncComponent(() => import('/@/layout/component/header.vue'));
+const LayoutHeader = defineAsyncComponent(
+  () => import('@/layout/component/header.vue')
+)
 // const LayoutMain = defineAsyncComponent(() => import('/@/layout/component/main.vue'));
 
 // 定义变量内容
-// const layoutScrollbarRef = ref<RefType>('')
+const layoutScrollbarRef = ref<RefType>('')
 // const layoutMainRef = ref<InstanceType<typeof LayoutMain>>()
 const route = useRoute()
 const storesThemeConfig = useThemeConfig()
@@ -34,7 +36,7 @@ const { themeConfig } = storeToRefs(storesThemeConfig)
 // 重置滚动条高度
 const updateScrollbar = () => {
   // 更新父级 scrollbar
-  // layoutScrollbarRef.value.update()
+  layoutScrollbarRef.value.update()
   // 更新子级 scrollbar
   // layoutMainRef.value!.layoutMainScrollbarRef.update()
 }
@@ -43,7 +45,7 @@ const initScrollBarHeight = () => {
   nextTick(() => {
     setTimeout(() => {
       updateScrollbar()
-      // layoutScrollbarRef.value.wrapRef.scrollTop = 0
+      layoutScrollbarRef.value.wrapRef.scrollTop = 0
       // layoutMainRef.value!.layoutMainScrollbarRef.wrapRef.scrollTop = 0
     }, 500)
   })
@@ -51,7 +53,7 @@ const initScrollBarHeight = () => {
 // 页面加载时
 onMounted(() => {
   initScrollBarHeight()
-  // NextLoading.done(600);
+  NextLoading.done(600)
 })
 // 监听路由的变化，切换界面时，滚动条置顶
 watch(

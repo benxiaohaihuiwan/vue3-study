@@ -23,7 +23,6 @@ import {
   watch,
   computed,
 } from 'vue'
-import { NextLoading } from '@/utils/loading'
 import { storeToRefs } from 'pinia'
 import pinia from '@/stores/index'
 import { useRoutesList } from '@/stores/routesList'
@@ -191,7 +190,6 @@ watch(
 // 页面加载时
 onBeforeMount(() => {
   console.log('state.menuList:', state.menuList)
-  NextLoading.done()
 })
 </script>
 

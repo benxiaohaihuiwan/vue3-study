@@ -59,3 +59,6 @@ declare type RouteItem<T = any> = {
 	title?: string;
 	id?: string | number;
 }
+
+// 声明 ref
+declare type RefType<T = any> = T | null;
