@@ -11,10 +11,13 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCol: typeof import('element-plus/es')['ElCol']
+    ElContainer: typeof import('element-plus/es')['ElContainer']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElIcon: typeof import('element-plus/es')['ElIcon']
     ElInput: typeof import('element-plus/es')['ElInput']
+    ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
+    ElSide: typeof import('element-plus/es')['ElSide']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
     ElUser: typeof import('element-plus/es')['ElUser']
