@@ -72,11 +72,23 @@
 
 <script setup lang='ts' name='loginAccount'>
 import { reactive, computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import Cookies from 'js-cookie'
 import { storeToRefs } from 'pinia'
 import { useThemeConfig } from '@/stores/themeConfig'
+import { useI18n } from 'vue-i18n'
+import { initFrontEndControlRoutes } from '@/router/frontEnd'
+import { Session } from '@/utils/storage'
+import { formatAxis } from '@/utils/formatTime'
+import { NextLoading } from '@/utils/loading'
+import { ElMessage } from 'element-plus'
+import nProgress from 'nprogress'
 
+const { t } = useI18n()
 const storesThemeConfig = useThemeConfig()
 const { themeConfig } = storeToRefs(storesThemeConfig)
+const route = useRoute()
+const router = useRouter()
 const state = reactive({
   isShowPassword: false,
   ruleForm: {
@@ -89,11 +101,53 @@ const state = reactive({
   },
 })
 
-// 登录
-const onSignIn = async () => {}
+// 时间获取
+const currentTime = computed(() => {
+  return formatAxis(new Date())
+})
 
-// 登录成功后跳转
-const signInSuccess = () => {}
+// 登录
+const onSignIn = async () => {
+  state.loading.signIn = true
+  // 存储token到浏览器缓存
+  Session.set('token', Math.random().toString(36).substring(0))
+  // 模拟数据，对接接口时，记得删除多余的代码
+  Cookies.set('userName', state.ruleForm.userName)
+  // 默认是前端控制路由
+  if (!themeConfig.value.isRequestRoutes) {
+    const isNoPower = await initFrontEndControlRoutes()
+    signInSuccess(isNoPower)
+  }
+}
+
+// 登录成功后进行跳转
+const signInSuccess = (isNoPower: boolean | undefined) => {
+  if (isNoPower) {
+    ElMessage.warning('抱歉，您没有登录权限')
+    Session.clear()
+  } else {
+    // 初始化登录成功时间问候语
+    let currentTimeInfo = currentTime.value
+    // 登录成功，跳转到首页
+    // 如果是复制粘贴的路径，非首页/登录页，那么登录成功后重定向到对应的路径中
+    if (route.query?.redirect) {
+      router.push({
+        path: <string>route.query?.redirect,
+        query:
+          Object.keys(<string>route.query?.params).length > 0
+            ? JSON.parse(<string>route.query?.params)
+            : '',
+      })
+    } else {
+      router.push('/')
+    }
+    // 登录成功后提示
+    const signInText: string = t('message.signInText')
+    ElMessage.success(`${currentTimeInfo},${signInText}`)
+    NextLoading.done()
+  }
+  state.loading.signIn = false
+}
 </script>
 
 <style lang='scss' scoped>

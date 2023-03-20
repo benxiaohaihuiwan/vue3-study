@@ -61,6 +61,7 @@ export async function frontEndResetRoute() {
  * @returns 返回替换后的路由数组
  */
 export function setFilterRouteEnd(){
+  console.log('dynamicRoutes:',dynamicRoutes)
   let filterRouteEnd:any = formatTwoStageRoutes(formatFlatteningRoutes(dynamicRoutes))
   console.log("---frontEnd----filterRouteEnd:",filterRouteEnd)
   filterRouteEnd[0].children = [...setFilterRoute(filterRouteEnd[0].children), ...notFoundAndNoPower];
@@ -118,6 +119,7 @@ export function setFilterHasRolesMenu(routes:any,roles:any){
       menu.push(item)
     }
   })
+  return menu
 }
 
 /**

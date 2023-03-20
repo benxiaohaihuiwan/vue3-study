@@ -45,6 +45,7 @@ export const router = createRouter({
  * @returns 返回处理后的一维路由菜单数组
  */
 export function formatFlatteningRoutes(arr: any){
+  console.log('---router--formatFlatteningRoutes:',arr)
   if(!arr.length) return
   for(let i=0; i< arr.length;i++){
     if(arr[i].children){
@@ -72,7 +73,7 @@ export function formatTwoStageRoutes(arr:any){
       // 判断是否是动态路由（xx/:id/:name）， 用于 tasView 等使用
       if(v.path.indexOf('/:') > -1){
         v.meta['isDynamic'] = true
-        v.meta['isDynamicPath'] = v,path
+        v.meta['isDynamicPath'] = v.path
       }
       newArr[0].children.push({...v})
       // 存 name 值，keep-alive中 include使用，实现路由的缓存
