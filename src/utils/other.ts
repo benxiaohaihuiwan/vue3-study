@@ -1,13 +1,13 @@
 import { nextTick, defineAsyncComponent } from 'vue';
 import type { App } from 'vue';
 import * as svg from '@element-plus/icons-vue';
-// import router from '@/router/index';
+import router from '@/router/index';
 import pinia from '@/stores/index';
 import { storeToRefs } from 'pinia';
 import { useThemeConfig } from '@/stores/themeConfig';
 import  i18n  from '@/i18n/index';
 // import { Local } from '/@/utils/storage';
-// import { verifyUrl } from '/@/utils/toolsValidate';
+import { verifyUrl } from '@/utils/toolsValidate';
 
 // 引入组件
 const SvgIcon = defineAsyncComponent(() => import('@/components/svgIcon/index.vue'));
@@ -168,12 +168,12 @@ export function handleEmpty(list: EmptyArrayType) {
  * 打开外部链接
  * @param val 当前点击项菜单
  */
-// export function handleOpenLink(val: RouteItem) {
-// 	const { origin, pathname } = window.location;
-// 	router.push(val.path);
-// 	if (verifyUrl(<string>val.meta?.isLink)) window.open(val.meta?.isLink);
-// 	else window.open(`${origin}${pathname}#${val.meta?.isLink}`);
-// }
+export function handleOpenLink(val: RouteItem) {
+	const { origin, pathname } = window.location;
+	router.push(val.path);
+	if (verifyUrl(<string>val.meta?.isLink)) window.open(val.meta?.isLink);
+	else window.open(`${origin}${pathname}#${val.meta?.isLink}`);
+}
 
 /**
  * 统一批量导出
@@ -212,9 +212,9 @@ const other = {
 	handleEmpty: (list: EmptyArrayType) => {
 		return handleEmpty(list);
 	},
-	// handleOpenLink: (val: RouteItem) => {
-	// 	handleOpenLink(val);
-	// },
+	handleOpenLink: (val: RouteItem) => {
+		handleOpenLink(val);
+	},
 };
 
 // 统一批量导出

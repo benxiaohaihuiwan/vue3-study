@@ -25,6 +25,9 @@ declare interface RouteToFrom<T = any> extends RouteItem {
 	children?: T[];
 }
 
+// 声明路由当前项类型集合
+declare type RouteItems<T extends RouteItem = any> = T[];
+
 // 声明路由当前项类型
 declare type RouteItem<T = any> = {
 	path: string;
