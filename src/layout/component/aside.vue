@@ -2,14 +2,14 @@
   <div class="h100" v-show="!isTagsViewCurrentFull">
     <el-aside class="layout-aside" :class="setCollapseStyle">
       <Logo v-if="setShowLogo"></Logo>
-      <!-- <el-scrollbar
+      <el-scrollbar
         class="flex-auto"
         ref="layoutAsideScrollbarRef"
         @mouseenter="onAsideEnterLeave(true)"
         @mouseleave="onAsideEnterLeave(false)"
       >
         <Vertical :menuList="state.menuList" />
-      </el-scrollbar> -->
+      </el-scrollbar>
     </el-aside>
   </div>
 </template>
@@ -33,9 +33,9 @@ import mittBus from '@/utils/mitt'
 
 // 引入组件
 const Logo = defineAsyncComponent(() => import('@/layout/logo/index.vue'))
-// const Vertical = defineAsyncComponent(
-//   () => import('/@/layout/navMenu/vertical.vue')
-// )
+const Vertical = defineAsyncComponent(
+  () => import('@/layout/navMenu/vertical.vue')
+)
 
 // 定义变量内容
 const layoutAsideScrollbarRef = ref()
@@ -190,6 +190,7 @@ watch(
 
 // 页面加载时
 onBeforeMount(() => {
+  console.log('state.menuList:', state.menuList)
   NextLoading.done()
 })
 </script>

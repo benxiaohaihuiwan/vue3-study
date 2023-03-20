@@ -18,7 +18,7 @@
           v-if="!val.meta.isLink || (val.meta.isLink && val.meta.isIframe)"
         >
           <SvgIcon :name="val.meta.icon"></SvgIcon>
-          <span>{{ $(val.meta.title) }}</span>
+          <span>{{ $t(val.meta.title) }}</span>
         </template>
         <template v-else>
           <a class="w100" @click.prevent="onALinkClick(val)">
