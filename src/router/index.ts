@@ -4,7 +4,10 @@ import 'nprogress/nprogress.css'
 import pinia from '@/stores/index'
 import { storeToRefs } from 'pinia'
 import { useThemeConfig } from '@/stores/themeConfig'
+import { useRoutesList } from '@/stores/routesList'
+import { Session } from '@/utils/storage'
 import { staticRoutes, notFoundAndNoPower } from '@/router/route'
+import { initFrontEndControlRoutes } from '@/router/frontEnd'
 /**
  * 1 前端控制路由时： isRequestRoutes 为 false，需要写roles，需要走 setFilterRoute 方法
  * 2 后端控制路由时： isRequestRoutes 为 true，不需要写 roles，不需要走 setFilterRoute 方法
@@ -86,9 +89,35 @@ export function formatTwoStageRoutes(arr:any){
 
 // 路由加载前
 router.beforeEach(async(to,from,next) => {
-  // NProgress.configure({ showSpinner: false})
-  NProgress.start()
-  next()
+  NProgress.configure({ showSpinner: false})
+  if (to.meta.title) NProgress.start()
+  const token = Session.get('token')
+  if(to.path === '/login' && !token){
+    next()
+    NProgress.done()
+  }else{
+    if(!token){
+      next(`/login?redirect=${to.path}&params=${JSON.stringify(to.query ? to.query : to.params)}`)
+      Session.clear()
+      NProgress.done()
+    }else if (token && to.path === '/login'){
+      next('/home')
+      NProgress.done()
+    }else{
+      const storesRoutesList = useRoutesList(pinia)
+      const { routesList } = storeToRefs(storesRoutesList)
+      if(!routesList.value.length){
+        if(isRequestRoutes){
+          // 后端去控制路由，暂未写
+        }else{
+          await initFrontEndControlRoutes()
+          next({path:to.path,query:to.query})
+        }
+      }else{
+        next()
+      }
+    }
+  }
 })
 
 // 路由加载后

@@ -8,14 +8,14 @@ import { Session } from '@/utils/storage'
  */
 
 export const useTagsViewRoutes = defineStore('tagsViewRoutes', {
-  state: (): TagsViewRoutesState => {
+  state: (): TagsViewRoutesState => ({
     tagsViewRoutes: [],
     isTagsViewCurrentFull: false
-  },
+  }),
   actions: {
     async setTagsViewRoutes(data:Array<string>){
       this.tagsViewRoutes = data
-    }
+    },
     async setCurrentFullScreen(bool:Boolean){
       Session.set('isTagsViewCurrentFull',bool)
       this.isTagsViewCurrentFull = bool
