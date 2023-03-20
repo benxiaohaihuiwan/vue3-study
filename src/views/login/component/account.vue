@@ -144,7 +144,7 @@ const signInSuccess = (isNoPower: boolean | undefined) => {
     // 登录成功后提示
     const signInText: string = t('message.signInText')
     ElMessage.success(`${currentTimeInfo},${signInText}`)
-    NextLoading.done()
+    NextLoading.start()
   }
   state.loading.signIn = false
 }

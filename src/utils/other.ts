@@ -5,7 +5,7 @@ import * as svg from '@element-plus/icons-vue';
 import pinia from '@/stores/index';
 import { storeToRefs } from 'pinia';
 import { useThemeConfig } from '@/stores/themeConfig';
-import  i18n  from '@/i18n/index.ts';
+import  i18n  from '@/i18n/index';
 // import { Local } from '/@/utils/storage';
 // import { verifyUrl } from '/@/utils/toolsValidate';
 

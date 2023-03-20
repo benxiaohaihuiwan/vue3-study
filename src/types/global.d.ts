@@ -10,3 +10,17 @@ declare module '*.vue' {
 declare interface Window {
 	nextLoading: boolean;
 }
+
+// 申明 数组
+declare type EmptyArrayType<T = any> = T[];
+
+// 申明 对象
+declare type EmptyObjectType<T = any> = {
+	[key: string]: T;
+};
+
+// 声明路由 to from
+declare interface RouteToFrom<T = any> extends RouteItem {
+	path?: string;
+	children?: T[];
+}
