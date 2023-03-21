@@ -14,3 +14,15 @@
 	// true: url正确
 	else return true;
 }
+
+/**
+ * 禁止输入空格
+ * @param val 当前值字符串
+ * @returns 返回处理后的字符串
+ */
+ export function verifyAndSpace(val: string) {
+	// 匹配空格
+	let v = val.replace(/(^\s*)|(\s*$)/g, '');
+	// 返回结果
+	return v;
+}
