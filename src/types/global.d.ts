@@ -19,6 +19,10 @@ declare type EmptyObjectType<T = any> = {
 	[key: string]: T;
 };
 
+// 申明 children 可选
+declare type ChilType<T = any> = {
+	children?: T[];
+}
 
 // 声明路由当前项类型
 declare type RouteItem<T = any> = {
