@@ -19,14 +19,6 @@ declare type EmptyObjectType<T = any> = {
 	[key: string]: T;
 };
 
-// 声明路由 to from
-declare interface RouteToFrom<T = any> extends RouteItem {
-	path?: string;
-	children?: T[];
-}
-
-// 声明路由当前项类型集合
-declare type RouteItems<T extends RouteItem = any> = T[];
 
 // 声明路由当前项类型
 declare type RouteItem<T = any> = {
@@ -58,6 +50,20 @@ declare type RouteItem<T = any> = {
 	transUrl?: string;
 	title?: string;
 	id?: string | number;
+};
+
+// 声明路由 to from
+declare interface RouteToFrom<T = any> extends RouteItem {
+	path?: string;
+	children?: T[];
+}
+
+// 声明路由当前项类型集合
+declare type RouteItems<T extends RouteItem = any> = T[];
+
+// 鼠标滚轮滚动类型
+declare interface WheelEventType extends WheelEvent {
+	wheelDelta: number
 }
 
 // 声明 ref
