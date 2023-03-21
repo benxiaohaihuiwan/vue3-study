@@ -29,21 +29,21 @@ export function elSvg(app: App) {
  * 设置浏览器标题国际化
  * @method const title = useTitle(); ==> title()
  */
-// export function useTitle() {
-// 	const stores = useThemeConfig(pinia);
-// 	const { themeConfig } = storeToRefs(stores);
-// 	nextTick(() => {
-// 		let webTitle = '';
-// 		let globalTitle: string = themeConfig.value.globalTitle;
-// 		const { path, meta } = router.currentRoute.value;
-// 		if (path === '/login') {
-// 			webTitle = <string>meta.title;
-// 		} else {
-// 			webTitle = setTagsViewNameI18n(router.currentRoute.value);
-// 		}
-// 		document.title = `${webTitle} - ${globalTitle}` || globalTitle;
-// 	});
-// }
+export function useTitle() {
+	const stores = useThemeConfig(pinia);
+	const { themeConfig } = storeToRefs(stores);
+	nextTick(() => {
+		let webTitle = '';
+		let globalTitle: string = themeConfig.value.globalTitle;
+		const { path, meta } = router.currentRoute.value;
+		if (path === '/login') {
+			webTitle = <string>meta.title;
+		} else {
+			webTitle = setTagsViewNameI18n(router.currentRoute.value);
+		}
+		document.title = `${webTitle} - ${globalTitle}` || globalTitle;
+	});
+}
 
 /**
  * 设置 自定义 tagsView 名称、 自定义 tagsView 名称国际化
@@ -190,9 +190,9 @@ const other = {
 	elSvg: (app: App) => {
 		elSvg(app);
 	},
-	// useTitle: () => {
-	// 	useTitle();
-	// },
+	useTitle: () => {
+		useTitle();
+	},
 	setTagsViewNameI18n(route: RouteToFrom) {
 		return setTagsViewNameI18n(route);
 	},
