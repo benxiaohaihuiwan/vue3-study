@@ -33,7 +33,7 @@
 
 </template>
 
-<script setup lang='ts' name=''>
+<script setup lang='ts' name='navMenuSubItem'>
 import { computed } from 'vue'
 import { RouteRecordRaw } from 'vue-router'
 import other from '@/utils/other'

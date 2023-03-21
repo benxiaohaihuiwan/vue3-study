@@ -39,7 +39,7 @@
   </el-menu>
 </template>
 
-<script setup lang='ts' name=''>
+<script setup lang='ts' name='navMenuVertical'>
 import { defineAsyncComponent, watch, reactive, onMounted, computed } from 'vue'
 import { useRoute, onBeforeRouteUpdate, RouteRecordRaw } from 'vue-router'
 import { storeToRefs } from 'pinia'
