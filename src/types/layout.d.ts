@@ -17,3 +17,11 @@ declare type TagsViewState<T = any> = {
   tagsViewList:T[]
   tagsViewRoutesList:T[]
 }
+
+// navBars breadcrumb
+declare type BreadcrumbState<T = any> = {
+	breadcrumbList: T[];
+	routeSplit: string[];
+	routeSplitFirst: string;
+	routeSplitIndex: number;
+};
