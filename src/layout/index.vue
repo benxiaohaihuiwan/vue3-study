@@ -12,14 +12,16 @@ import {
 import { storeToRefs } from 'pinia'
 import { useThemeConfig } from '@/stores/themeConfig'
 import mittBus from '@/utils/mitt'
-// import { Local } from '@/utils/storage'
+import { Local } from '@/utils/storage'
 
 // 引入组件
 const layouts: any = {
   defaults: defineAsyncComponent(() => import('@/layout/main/defaults.vue')),
-  // 	classic: defineAsyncComponent(() => import('/@/layout/main/classic.vue')),
-  // transverse: defineAsyncComponent(() => import('/@/layout/main/transverse.vue')),
-  // columns: defineAsyncComponent(() => import('/@/layout/main/columns.vue')),
+  classic: defineAsyncComponent(() => import('@/layout/main/classic.vue')),
+  transverse: defineAsyncComponent(
+    () => import('@/layout/main/transverse.vue')
+  ),
+  columns: defineAsyncComponent(() => import('@/layout/main/columns.vue')),
 }
 
 // 定义变量内容
@@ -37,9 +39,10 @@ const onLayoutResize = () => {
       clientWidth,
     })
   } else {
-    mittBus.emit('layoutMoblieResize', {
-      // layout:Local.get('oldLayout') ? Local.get('oldLayout'): themeConfig.value.layout,
-      layout: themeConfig.value.layout,
+    const oldLayout: any = Local.get('oldLayout')
+    const layoutMoblieResize: any = 'layoutMoblieResize'
+    mittBus.emit(layoutMoblieResize, {
+      layout: oldLayout ? oldLayout : themeConfig.value.layout,
       clientWidth,
     })
   }
