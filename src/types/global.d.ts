@@ -56,6 +56,9 @@ declare type RouteItem<T = any> = {
 	id?: string | number;
 };
 
+// 声明 HTMLElement
+declare type HtmlType = HTMLElement | string | undefined | null;
+
 // 声明路由 to from
 declare interface RouteToFrom<T = any> extends RouteItem {
 	path?: string;
