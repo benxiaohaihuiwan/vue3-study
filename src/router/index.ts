@@ -3,6 +3,7 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import pinia from '@/stores/index'
 import { storeToRefs } from 'pinia'
+import { useKeepALiveNames } from '@/stores/keepAliveNames'
 import { useThemeConfig } from '@/stores/themeConfig'
 import { useRoutesList } from '@/stores/routesList'
 import { Session } from '@/utils/storage'
@@ -19,7 +20,6 @@ import { initFrontEndControlRoutes } from '@/router/frontEnd'
 
 // 读取 ‘src/stores/themeConfig.ts’ 是否开启后端控制路由配置
 const storesThemeConfig = useThemeConfig(pinia)
-console.log('storesThemeConfig:',storesThemeConfig)
 const { themeConfig } = storeToRefs(storesThemeConfig)
 const { isRequestRoutes } = themeConfig.value
 
@@ -45,13 +45,14 @@ export const router = createRouter({
  * @returns 返回处理后的一维路由菜单数组
  */
 export function formatFlatteningRoutes(arr: any){
-  console.log('---router--formatFlatteningRoutes:',arr)
+  console.log('---路由多级嵌套数组处理成一维数组--start-:',arr)
   if(!arr.length) return
   for(let i=0; i< arr.length;i++){
     if(arr[i].children){
       arr = arr.slice(0, i + 1).concat(arr[i].children,arr.slice(i+1))
     }
   }
+  console.log('---路由多级嵌套数组处理成一维数组--end-:',arr)
   return arr
 }
 
@@ -80,8 +81,8 @@ export function formatTwoStageRoutes(arr:any){
       // 路径： @/layout/routerView/parent.vue
       if(newArr[0].meta.isKeepAlive && v.meta.isKeepAlive){
         cacheList.push(v.name)
-        // const stores = useKeepALiveNames(pinia)
-        // stores.setCacheKeepAlive(cacheList)
+        const stores = useKeepALiveNames(pinia)
+        stores.setCacheKeepAlive(cacheList)
       }
     }
   })

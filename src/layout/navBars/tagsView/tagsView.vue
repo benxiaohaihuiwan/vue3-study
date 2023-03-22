@@ -45,7 +45,7 @@
             <SvgIcon
               name="ele-Close"
               class="layout-navbars-tags-view-ul-li-icon layout-icon-active"
-              v-if="!v.meta.isAffix"
+              v-if="!v.meta?.isAffix"
               @click.stop="
                 closeCurrentTagsView(
                   getThemeConfig.isShareTagsView ? v.path : v.url
@@ -56,7 +56,7 @@
           <SvgIcon
             name="ele-Close"
             class="layout-navbars-tags-view-ul-li-icon layout-icon-three"
-            v-if="!v.meta.isAffix"
+            v-if="!v.meta?.isAffix"
             @click.stop="
               closeCurrentTagsView(
                 getThemeConfig.isShareTagsView ? v.path : v.url

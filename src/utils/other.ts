@@ -30,18 +30,19 @@ export function elSvg(app: App) {
  * @method const title = useTitle(); ==> title()
  */
 export function useTitle() {
-	const stores = useThemeConfig(pinia);
-	const { themeConfig } = storeToRefs(stores);
+	const stores = useThemeConfig(pinia)
+	const { themeConfig } = storeToRefs(stores)
 	nextTick(() => {
-		let webTitle = '';
-		let globalTitle: string = themeConfig.value.globalTitle;
-		const { path, meta } = router.currentRoute.value;
+		let webTitle = ''
+		let globalTitle: string = themeConfig.value.globalTitle
+		const { path, meta } = router.currentRoute.value
 		if (path === '/login') {
-			webTitle = <string>meta.title;
+			webTitle = <string>meta.title
 		} else {
-			webTitle = setTagsViewNameI18n(router.currentRoute.value);
+      console.log('---router.currentRoute.value---:',router.currentRoute.value)
+			webTitle = setTagsViewNameI18n(router.currentRoute.value)
 		}
-		document.title = `${webTitle} - ${globalTitle}` || globalTitle;
+		document.title = `${webTitle} - ${globalTitle}` || globalTitle
 	});
 }
 
@@ -51,22 +52,22 @@ export function useTitle() {
  * @returns 返回当前 tagsViewName 名称
  */
 export function setTagsViewNameI18n(item: any) {
-	let tagsViewName: string = '';
-	const { query, params, meta } = item;
+	let tagsViewName: string = ''
+	const { query, params, meta } = item
 	// 修复tagsViewName匹配到其他含下列单词的路由
-	const pattern = /^\{("(zh-cn|en|zh-tw)":"[^,]+",?){1,3}}$/;
+	const pattern = /^\{("(zh-cn|en)":"[^,]+",?){1,3}}$/
 	if (query?.tagsViewName || params?.tagsViewName) {
 		if (pattern.test(query?.tagsViewName) || pattern.test(params?.tagsViewName)) {
 			// 国际化
-			const urlTagsParams = (query?.tagsViewName && JSON.parse(query?.tagsViewName)) || (params?.tagsViewName && JSON.parse(params?.tagsViewName));
-			tagsViewName = urlTagsParams[i18n.global.locale.value];
+			const urlTagsParams = (query?.tagsViewName && JSON.parse(query?.tagsViewName)) || (params?.tagsViewName && JSON.parse(params?.tagsViewName))
+			tagsViewName = urlTagsParams[i18n.global.locale.value]
 		} else {
 			// 非国际化
-			tagsViewName = query?.tagsViewName || params?.tagsViewName;
+			tagsViewName = query?.tagsViewName || params?.tagsViewName
 		}
 	} else {
 		// 非自定义 tagsView 名称
-		tagsViewName = i18n.global.t(meta.title);
+		tagsViewName = meta?.title ? i18n.global.t(meta?.title) : ''
 	}
 	return tagsViewName;
 }
@@ -100,8 +101,8 @@ export const lazyImg = (el: string, arr: EmptyArrayType) => {
  * @returns 返回 `window.localStorage` 中读取的缓存值 `globalComponentSize`
  */
 export const globalComponentSize = (): string => {
-	const stores = useThemeConfig(pinia);
-	const { themeConfig } = storeToRefs(stores);
+	const stores = useThemeConfig(pinia)
+	const { themeConfig } = storeToRefs(stores)
   const themeConfigStorage:any = Local.get('themeConfig')
 	return themeConfigStorage?.globalComponentSize || themeConfig.value?.globalComponentSize;
 };

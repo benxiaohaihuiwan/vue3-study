@@ -62,7 +62,6 @@ const getGlobalComponentSize = computed(() => {
 })
 // 获取全局 i18n
 const getGlobalI18n = computed(() => {
-  console.log(locale.value, '----locale.value---')
   return messages.value[locale.value]
 })
 // 设置初始化，防止刷新时恢复默认
@@ -89,7 +88,7 @@ onMounted(() => {
       style.cssText = Local.get('themeConfigStyle')
     }
     // 获取缓存中的全屏配置
-    if (Session.get('isTagsViewCurretnFull')) {
+    if (Session.get('isTagsViewCurrentFull')) {
       stores.setCurrentFullScreen(Session.get('isTagsViewCurrentFull'))
     }
   })
