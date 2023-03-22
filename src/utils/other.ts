@@ -6,7 +6,7 @@ import pinia from '@/stores/index';
 import { storeToRefs } from 'pinia';
 import { useThemeConfig } from '@/stores/themeConfig';
 import  i18n  from '@/i18n/index';
-// import { Local } from '/@/utils/storage';
+import { Local } from '@/utils/storage';
 import { verifyUrl } from '@/utils/toolsValidate';
 
 // 引入组件
@@ -99,11 +99,12 @@ export const lazyImg = (el: string, arr: EmptyArrayType) => {
  * 全局组件大小
  * @returns 返回 `window.localStorage` 中读取的缓存值 `globalComponentSize`
  */
-// export const globalComponentSize = (): string => {
-// 	const stores = useThemeConfig(pinia);
-// 	const { themeConfig } = storeToRefs(stores);
-// 	return Local.get('themeConfig')?.globalComponentSize || themeConfig.value?.globalComponentSize;
-// };
+export const globalComponentSize = (): string => {
+	const stores = useThemeConfig(pinia);
+	const { themeConfig } = storeToRefs(stores);
+  const themeConfigStorage:any = Local.get('themeConfig')
+	return themeConfigStorage?.globalComponentSize || themeConfig.value?.globalComponentSize;
+};
 
 /**
  * 对象深克隆
@@ -199,9 +200,9 @@ const other = {
 	lazyImg: (el: string, arr: EmptyArrayType) => {
 		lazyImg(el, arr);
 	},
-	// globalComponentSize: () => {
-	// 	return globalComponentSize();
-	// },
+	globalComponentSize: () => {
+		return globalComponentSize();
+	},
 	deepClone: (obj: EmptyObjectType) => {
 		return deepClone(obj);
 	},
