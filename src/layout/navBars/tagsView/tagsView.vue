@@ -2,17 +2,17 @@
   <div
     class="layout-navbars-tags-view"
     :class="{
-      'layout-navbars-tags-view-shadiw': getThemeConfig.layout === 'classic',
+      'layout-navbars-tags-view-shadow': getThemeConfig.layout === 'classic',
     }"
   >
     <el-scrollbar ref="scrollbarRef" @wheel.prevent="onHandleScroll">
       <ul
-        class="layout-navbars-tags-view"
+        class="layout-navbars-tags-view-ul"
         :class="setTagsStyle"
         ref="tagsUlRef"
       >
         <li
-          v-for="(k, v) in state.tagsViewList"
+          v-for="(v, k) in state.tagsViewList"
           :key="k"
           class="layout-navbars-tags-view-ul-li"
           :data-url="v.url"
@@ -625,7 +625,7 @@ const onHandleScroll = (e: WheelEventType) => {
 }
 // 设置 tagsView 可以进行拖拽
 const initSortable = async () => {
-  const el = <HTMLElement>document.querySelector('.layout-navbars-tagsview-ul')
+  const el = <HTMLElement>document.querySelector('.layout-navbars-tags-view-ul')
   if (!el) return false
   state.sortable.el && state.sortable.destroy()
   state.sortable = Sortable.create(el, {
@@ -795,7 +795,7 @@ watch(
   }
   // 风格4
   .tags-style-four {
-    .layout-navbars-tagsview-ul-li {
+    .layout-navbars-tags-view-ul-li {
       margin-right: 0 !important;
       border: none !important;
       position: relative;
@@ -827,15 +827,15 @@ watch(
       -webkit-mask-position: right bottom, left bottom, center top;
       -webkit-mask-repeat: no-repeat;
     }
-    .layout-navbars-tagsview-ul-li {
+    .layout-navbars-tags-view-ul-li {
       padding: 0 5px;
       border-width: 15px 27px 15px;
       border-style: solid;
       border-color: transparent;
       margin: 0 -15px;
       .layout-icon-active,
-      .layout-navbars-tagsview-ul-li-iconfont,
-      .layout-navbars-tagsview-ul-li-refresh {
+      .layout-navbars-tags-view-ul-li-iconfont,
+      .layout-navbars-tags-view-ul-li-refresh {
         display: none;
       }
       .layout-icon-three {
@@ -855,7 +855,7 @@ watch(
     }
   }
 }
-.layout-navbars-tagsview-shadow {
+.layout-navbars-tags-view-shadow {
   box-shadow: rgb(0 21 41 / 4%) 0px 1px 4px;
 }
 </style>
