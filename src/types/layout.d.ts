@@ -32,3 +32,14 @@ declare type SearchState<T = any> = {
 	menuQuery: string;
 	tagsViewList: T[];
 }
+
+// columnsAside
+declare type ColumnsAsideState<T = any> = {
+	columnsAsideList: T[];
+	liIndex: number;
+	liOldIndex: null | number;
+	liHoverIndex: null | number;
+	liOldPath: null | string;
+	difference: number;
+	routeSplit: string[];
+}
