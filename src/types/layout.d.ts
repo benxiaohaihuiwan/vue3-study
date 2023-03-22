@@ -43,3 +43,17 @@ declare type ColumnsAsideState<T = any> = {
 	difference: number;
 	routeSplit: string[];
 }
+
+// navBars parent
+declare type ParentViewState<T = any> = {
+	refreshRouterViewKey: string;
+	iframeRefreshKey: string;
+	keepAliveNameList: string[];
+	iframeList: T[];
+}
+
+// navBars link
+declare type LinkViewState = {
+	title: string;
+	isLink: string;
+}
