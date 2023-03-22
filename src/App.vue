@@ -1,4 +1,5 @@
 <template>
+  <!-- 全局配置组件 -->
   <el-config-provider :size="getGlobalComponentSize" :locale="getGlobalI18n">
     <router-view v-show="setLockScreen" />
     <LockScreen v-if="themeConfig.isLockScreen" />
@@ -33,7 +34,7 @@ const LockScreen = defineAsyncComponent(
   () => import('@/layout/lockScreen/index.vue')
 )
 const Setings = defineAsyncComponent(
-  () => import('@/layout/navBars/breadcrumb/setings.vue')
+  () => import('@/layout/navBars/breadcrumb/settings.vue')
 )
 const CloseFull = defineAsyncComponent(
   () => import('@/layout/navBars/breadcrumb/closeFull.vue')
@@ -61,6 +62,7 @@ const getGlobalComponentSize = computed(() => {
 })
 // 获取全局 i18n
 const getGlobalI18n = computed(() => {
+  console.log(locale.value, '----locale.value---')
   return messages.value[locale.value]
 })
 // 设置初始化，防止刷新时恢复默认
@@ -87,8 +89,8 @@ onMounted(() => {
       style.cssText = Local.get('themeConfigStyle')
     }
     // 获取缓存中的全屏配置
-    if (Session.get('isTagsViewCurrenFull')) {
-      stores.setCurrentFullScreen(Session.get('isTagsViewCurrenFull'))
+    if (Session.get('isTagsViewCurretnFull')) {
+      stores.setCurrentFullScreen(Session.get('isTagsViewCurrentFull'))
     }
   })
 })

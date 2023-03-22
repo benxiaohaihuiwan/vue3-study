@@ -1,4 +1,7 @@
 import { createI18n } from 'vue-i18n';
+import pinia from '@/stores/index';
+import { storeToRefs } from 'pinia';
+import { useThemeConfig } from '@/stores/themeConfig';
 
 // 定义语言国际化内容
 
@@ -44,6 +47,9 @@ for (const key in itemize) {
 		message: mergeArrObj(itemize, key),
 	};
 }
+// 读取 pinia 默认语言
+const stores = useThemeConfig(pinia)
+const { themeConfig } = storeToRefs(stores)
 
 // 导出语言国际化
 // https://vue-i18n.intlify.dev/guide/essentials/fallback.html#explicit-fallback-with-one-locale
@@ -54,8 +60,7 @@ const i18n = createI18n({
 	silentFallbackWarn: true,  // 是否在回退到 fallbackLocale 或 root 时取消警告。
 	fallbackWarn: false,
   globalInjection: true,  // 可以使用$t方式
-	// locale: themeConfig.value.globalI18n,
-  locale:'zh-cn',
+	locale: themeConfig.value.globalI18n,
 	fallbackLocale: zhcnLocale.name, //切换 zh-cn en-us 控制展示文字
 	messages,
 });

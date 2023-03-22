@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-navbars-close-full" v-if="isTagsViewCurrenFull">
+  <div class="layout-navbars-close-full" v-if="isTagsViewCurrentFull">
     <div class="layout-navbars-close-full-icon">
       <SvgIcon
         name="ele-Close"
