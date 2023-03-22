@@ -10,7 +10,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="layoutCloseFull">
+<script setup lang="ts" name="layoutBreadcrumbCloseFull">
 import { storeToRefs } from 'pinia'
 import { useTagsViewRoutes } from '@/stores/tagsViewRoutes'
 
