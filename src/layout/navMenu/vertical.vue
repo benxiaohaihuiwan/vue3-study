@@ -7,7 +7,7 @@
     :unique-opened="getThemeConfig.isUniqueOpened"
     :collapse-transition="true"
   >
-    <template v-for="val in menuLists">
+    <template v-for="val in menuList">
       <el-sub-menu
         :index="val.path"
         v-if="val.children && val.children.length"
