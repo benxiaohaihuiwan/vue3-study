@@ -30,10 +30,10 @@ import { NextLoading } from '@/utils/loading'
 
 // 引入组件
 const LayoutParentView = defineAsyncComponent(
-  () => import('/@/layout/routerView/parent.vue')
+  () => import('@/layout/routerView/parent.vue')
 )
 const LayoutFooter = defineAsyncComponent(
-  () => import('/@/layout/footer/index.vue')
+  () => import('@/layout/footer/index.vue')
 )
 
 // 定义变量内容

@@ -3,7 +3,7 @@
     <div class="layout-lock-screen-mask"></div>
     <div
       class="layout-lock-screen-img"
-      :class="{ 'layout-lock-screen-filter': state.isShowLoockLogin }"
+      :class="{ 'layout-lock-screen-filter': state.isShowLockLogin }"
     ></div>
     <div class="layout-lock-screen">
       <div
@@ -33,7 +33,7 @@
         </div>
       </div>
       <transition name="el-zoom-in-center">
-        <div v-show="state.isShowLoockLogin" class="layout-lock-screen-login">
+        <div v-show="state.isShowLockLogin" class="layout-lock-screen-login">
           <div class="layout-lock-screen-login-box">
             <div class="layout-lock-screen-login-box-img">
               <img
@@ -85,7 +85,7 @@ const state = reactive({
   transparency: 1,
   downClientY: 0,
   moveDifference: 0,
-  isShowLoockLogin: false,
+  isShowLockLogin: false,
   isFlags: false,
   querySelectorEl: '' as HtmlType,
   time: {
@@ -123,11 +123,11 @@ const onMoveApp = (move: TouchEvent) => {
 const onMove = () => {
   if (state.isFlags) {
     const el = <HTMLElement>state.querySelectorEl
-    const opacitys = (state.transparency -= 1 / 200)
+    const opacity = (state.transparency -= 1 / 200)
     if (state.moveDifference >= 0) return false
     el.setAttribute(
       'style',
-      `top:${state.moveDifference}px;cursor:pointer;opacity:${opacitys};`
+      `top:${state.moveDifference}px;cursor:pointer;opacity:${opacity};`
     )
     if (state.moveDifference < -400) {
       el.setAttribute(
@@ -140,7 +140,7 @@ const onMove = () => {
       }, 300)
     }
     if (state.moveDifference === -el.clientHeight) {
-      state.isShowLoockLogin = true
+      state.isShowLockLogin = true
       layoutLockScreenInputRef.value.focus()
     }
   }

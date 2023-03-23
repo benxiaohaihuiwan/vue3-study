@@ -39,7 +39,6 @@ export function useTitle() {
 		if (path === '/login') {
 			webTitle = <string>meta.title
 		} else {
-      console.log('---router.currentRoute.value---:',router.currentRoute.value)
 			webTitle = setTagsViewNameI18n(router.currentRoute.value)
 		}
 		document.title = `${webTitle} - ${globalTitle}` || globalTitle

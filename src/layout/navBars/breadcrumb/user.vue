@@ -69,7 +69,7 @@
     </div>
     <div
       class="layout-navbars-breadcrumb-user-icon"
-      @click="onLayoutSetingClick"
+      @click="onLayoutSettingClick"
     >
       <i class="icon-skin iconfont" :title="$t('message.user.title3')"></i>
     </div>
@@ -210,8 +210,8 @@ const onScreenfullClick = () => {
   })
 }
 // 布局配置 icon 点击时
-const onLayoutSetingClick = () => {
-  mittBus.emit('openSetingsDrawer')
+const onLayoutSettingClick = () => {
+  mittBus.emit('openSettingsDrawer')
 }
 // 下拉菜单点击时
 const onHandleCommandClick = (path: string) => {

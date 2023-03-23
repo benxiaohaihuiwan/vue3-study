@@ -54,7 +54,7 @@ const state = reactive<SearchState>({
 const openSearch = () => {
   state.menuQuery = ''
   state.isShowSearch = true
-  initTageView()
+  initTagsView()
   nextTick(() => {
     setTimeout(() => {
       layoutMenuAutocompleteRef.value.focus()
@@ -84,7 +84,7 @@ const createFilter = (queryString: string) => {
   }
 }
 // 初始化菜单数据
-const initTageView = () => {
+const initTagsView = () => {
   if (state.tagsViewList.length > 0) return false
   tagsViewRoutes.value.map((v: RouteItem) => {
     if (!v.meta?.isHide) state.tagsViewList.push({ ...v })
