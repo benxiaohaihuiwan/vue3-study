@@ -169,7 +169,7 @@ body,
 		z-index: 9999998;
 		animation: error-img 0.3s;
 	}
-	.layout-mian-height-50 {
+	.layout-main-height-50 {
 		height: calc(100vh - 50px);
 	}
 	.layout-columns-warp {
@@ -210,7 +210,7 @@ body,
 }
 .flex-center {
 	@extend .flex;
-	flex-direction: column;
+	flex-direction: column !important;
 	width: 100%;
 	overflow: hidden;
 }
