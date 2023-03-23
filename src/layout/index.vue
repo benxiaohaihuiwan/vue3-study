@@ -30,7 +30,7 @@ const { themeConfig } = storeToRefs(storesThemeConfig)
 
 // 窗口大小改变时（适配移动端）
 const onLayoutResize = () => {
-  // if(!Local.get('oldLayout')) Local.set('oldLayout',themeConfig.value.layout)
+  if (!Local.get('oldLayout')) Local.set('oldLayout', themeConfig.value.layout)
   const clientWidth = document.body.clientWidth
   if (clientWidth < 1000) {
     themeConfig.value.isCollapse = false
