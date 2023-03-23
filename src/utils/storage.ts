@@ -14,6 +14,7 @@ export const Local = {
    *  __NEXT_NAME__ 已经在vite.config.ts中进行全局配置
   */
   setKey(key:string){
+    // @ts-ignore
     return `${__NEXT_NAME__}:${key}`
   },
 
