@@ -33,6 +33,7 @@ const ColumnsAside = defineAsyncComponent(
 
 // 定义变量内容
 const layoutScrollbarRef = ref<RefType>('')
+// @ts-ignore
 const layoutMainRef = ref<InstanceType<typeof LayoutMain>>()
 const route = useRoute()
 const storesThemeConfig = useThemeConfig()

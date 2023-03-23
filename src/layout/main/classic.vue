@@ -39,6 +39,7 @@ const LayoutTagsView = defineAsyncComponent(
 )
 
 // 定义变量内容
+// @ts-ignore
 const layoutMainRef = ref<InstanceType<typeof LayoutMain>>()
 const route = useRoute()
 const storesThemeConfig = useThemeConfig()

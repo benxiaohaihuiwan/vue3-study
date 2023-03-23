@@ -20,6 +20,7 @@ const LayoutMain = defineAsyncComponent(
 )
 
 // 定义变量内容
+// @ts-ignore
 const layoutMainRef = ref<InstanceType<typeof LayoutMain>>()
 const storesThemeConfig = useThemeConfig()
 const { themeConfig } = storeToRefs(storesThemeConfig)
