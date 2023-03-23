@@ -26,6 +26,7 @@ export const Local = {
   // 获取永久缓存
   get(key:string){
     let json = <string>window.localStorage.getItem(Local.setKey(key))
+    return JSON.parse(json)
   },
 
   // 移除永久缓存
