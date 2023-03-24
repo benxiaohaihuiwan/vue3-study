@@ -1,0 +1,95 @@
+
+export  const  homeOne = [
+  {
+    num1: '125,12',
+    num2: '-12.32',
+    num3: '订单统计信息',
+    num4: 'fa fa-meetup',
+    color1: '#FF6462',
+    color2: '--next-color-primary-lighter',
+    color3: '--el-color-primary',
+  },
+  {
+    num1: '653,33',
+    num2: '+42.32',
+    num3: '月度计划信息',
+    num4: 'iconfont icon-ditu',
+    color1: '#6690F9',
+    color2: '--next-color-success-lighter',
+    color3: '--el-color-success',
+  },
+  {
+    num1: '125,65',
+    num2: '+17.32',
+    num3: '年度计划信息',
+    num4: 'iconfont icon-zaosheng',
+    color1: '#6690F9',
+    color2: '--next-color-warning-lighter',
+    color3: '--el-color-warning',
+  },
+  {
+    num1: '520,43',
+    num2: '-10.01',
+    num3: '访问统计信息',
+    num4: 'fa fa-github-alt',
+    color1: '#FF6462',
+    color2: '--next-color-danger-lighter',
+    color3: '--el-color-danger',
+  },
+]
+export const homeThree = [
+  {
+    icon: 'iconfont icon-yangan',
+    label: '浅粉红',
+    value: '2.1%OBS/M',
+    iconColor: '#F72B3F',
+  },
+  {
+    icon: 'iconfont icon-wendu',
+    label: '深红(猩红)',
+    value: '30℃',
+    iconColor: '#91BFF8',
+  },
+  {
+    icon: 'iconfont icon-shidu',
+    label: '淡紫红',
+    value: '57%RH',
+    iconColor: '#88D565',
+  },
+  {
+    icon: 'iconfont icon-shidu',
+    label: '弱紫罗兰红',
+    value: '107w',
+    iconColor: '#88D565',
+  },
+  {
+    icon: 'iconfont icon-zaosheng',
+    label: '中紫罗兰红',
+    value: '57DB',
+    iconColor: '#FBD4A0',
+  },
+  {
+    icon: 'iconfont icon-zaosheng',
+    label: '紫罗兰',
+    value: '57PV',
+    iconColor: '#FBD4A0',
+  },
+  {
+    icon: 'iconfont icon-zaosheng',
+    label: '暗紫罗兰',
+    value: '517Cpd',
+    iconColor: '#FBD4A0',
+  },
+  {
+    icon: 'iconfont icon-zaosheng',
+    label: '幽灵白',
+    value: '12kg',
+    iconColor: '#FBD4A0',
+  },
+  {
+    icon: 'iconfont icon-zaosheng',
+    label: '海军蓝',
+    value: '64fm',
+    iconColor: '#FBD4A0',
+  },
+]
