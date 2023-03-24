@@ -61,7 +61,6 @@ module.exports = {
     'vue/no-template-key': 'off',
     'vue/no-v-html': 'off',
     'vue/comment-directive': 'off',
-    'vue/no-parsing-error': 'off',
     'vue/no-deprecated-v-on-native-modifier': 'off',
     'vue/multi-word-component-names': 'off',
     'no-useless-escape': 'off',
@@ -78,6 +77,7 @@ module.exports = {
     'no-v-model-argument': 'off',
     'no-case-declarations': 'off',
     'no-redeclare': 'off',
+    "vue/no-parsing-error": [2, { "x-invalid-end-tag": false }],
     semi: false,
   },
 };

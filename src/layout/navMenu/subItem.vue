@@ -31,8 +31,6 @@
   </template>
 </template>
 
-</template>
-
 <script setup lang='ts' name='navMenuSubItem'>
 import { computed } from 'vue'
 import { RouteRecordRaw } from 'vue-router'
