@@ -8,6 +8,7 @@ export default {
 		systemUser: 'systemUser',
 		systemDept: 'systemDept',
 		systemDic: 'systemDic',
+    vxeTable:'VXETable',
 		limits: 'limits',
 		limitsFrontEnd: 'FrontEnd',
 		limitsFrontEndPage: 'FrontEndPage',

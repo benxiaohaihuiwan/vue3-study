@@ -94,6 +94,39 @@ declare module 'vue-router' {
           }
 				]
 			},
+      {
+				path: '/plugins',
+				name: 'plugins',
+				component: () => import('@/layout/routerView/parent.vue'),
+				redirect: '/plugins/vxe-table',
+				meta: {
+					title: 'message.router.vxeTable',
+					isLink: '',
+					isHide: false,
+					isKeepAlive: true,
+					isAffix: false,
+					isIframe: false,
+					roles: ['admin'],
+					icon: 'iconfont icon-shuju',
+				},
+				children: [
+					{
+						path: '/plugins/vxe-table',
+						name: 'VxeTable',
+						component: () => import('@/views/plugins/vxe-table/index.vue'),
+						meta: {
+							title: 'message.router.vxeTable',
+							isLink: '',
+							isHide: false,
+							isKeepAlive: true,
+							isAffix: false,
+							isIframe: false,
+							roles: ['admin'],
+							icon: 'iconfont icon-caidan',
+						}
+          }
+				]
+			},
     ]
   }
  ]

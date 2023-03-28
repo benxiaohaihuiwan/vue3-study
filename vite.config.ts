@@ -10,7 +10,8 @@ import { viteMockServe } from 'vite-plugin-mock'
 import { createHtmlPlugin } from 'vite-plugin-html'
 
 import { resolve } from 'path'
-
+// vxe-table  按需加载插件
+import { createStyleImportPlugin, VxeTableResolve } from 'vite-plugin-style-import'
 const pathResolve = (dir: string) => {
 	return resolve(__dirname, '.', dir);
 };
@@ -28,6 +29,11 @@ const viteConfig = defineConfig((mode: ConfigEnv) => {
     plugins: [
       vue(),
       viteMockServe(),
+      createStyleImportPlugin({
+        resolves: [
+          VxeTableResolve()
+        ],
+      }),
       createHtmlPlugin({
         inject:{
           data:{
