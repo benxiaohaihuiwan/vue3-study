@@ -1,0 +1,1 @@
+import { default as VxeTable } from './vxe-table.vue'
