@@ -190,4 +190,14 @@ export default {
 		btnTwo: 'Update now',
 		btnTwoLoading: 'Updating',
 	},
+  button:{
+    'add':'add',
+    'edit':'edit',
+    'delete':'delete',
+    'import':'import',
+    'export':'export',
+    'detail':'detail',
+    'view':'view',
+    'save':'save'
+  }
 };

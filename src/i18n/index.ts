@@ -19,7 +19,7 @@ import zhcnLocale from 'element-plus/lib/locale/lang/zh-cn';
 
 // 定义变量内容
 const messages = {};
-const element = { en: enLocale, 'zh-cn': zhcnLocale };
+const element = { en: {...enLocale,}, 'zh-cn': {...zhcnLocale,} };
 const itemize = { en: [], 'zh-cn': [] };
 const modules: Record<string, any> = import.meta.glob('./**/*.ts', { eager: true });
 

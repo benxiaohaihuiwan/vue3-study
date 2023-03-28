@@ -190,4 +190,14 @@ export default {
 		btnTwo: '马上更新',
 		btnTwoLoading: '更新中',
 	},
+  button:{
+    'add':'新增',
+    'edit':'编辑',
+    'delete':'删除',
+    'import':'导入',
+    'export':'导出',
+    'detail':'详情',
+    'view':'查看',
+    'save':'保存'
+  }
 };

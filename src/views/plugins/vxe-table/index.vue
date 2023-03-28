@@ -1,116 +1,377 @@
 <template>
-  <div>
-    <vxe-table border :data="tableData">
-      <vxe-column type="seq" width="60"></vxe-column>
-      <vxe-column field="name" title="Name">
-        <template #default="{ row }">
-          <span>自定义插槽模板 {{ row.name }}</span>
-        </template>
-      </vxe-column>
-      <vxe-column field="sex" title="Sex"></vxe-column>
-      <vxe-column field="age" title="Age"></vxe-column>
-    </vxe-table>
-
-    <vxe-grid v-bind="gridOptions">
-      <template #name="{ row }">
-        <span>自定义插槽模板 {{ row.name }}</span>
-      </template>
-    </vxe-grid>
-  </div>
+  <!-- https://vxetable.cn/#/table/grid/fullEdit -->
+  <vxe-grid ref="xGrid" v-bind="gridOptions"></vxe-grid>
 </template>
 
 <script setup lang='ts' name='VxeTable'>
-import { defineComponent, ref, reactive } from 'vue'
-import { VxeGridProps } from 'vxe-table'
+import { defineComponent, onMounted, reactive, ref, computed } from 'vue'
+import { VXETable, VxeGridInstance, VxeGridProps } from 'vxe-table'
+import XEUtils from 'xe-utils'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+const xGrid = ref<VxeGridInstance>()
 
-interface UserVO {
-  id: number
-  name: string
-  role: string
-  sex: string
-  age: number
-  address: string
-}
-
-const tableData = ref<UserVO[]>([
-  {
-    id: 10001,
-    name: 'Test1',
-    role: 'Develop',
-    sex: 'Man',
-    age: 28,
-    address: 'test abc',
-  },
-  {
-    id: 10002,
-    name: 'Test2',
-    role: 'Test',
-    sex: 'Women',
-    age: 22,
-    address: 'Guangzhou',
-  },
-  {
-    id: 10003,
-    name: 'Test3',
-    role: 'PM',
-    sex: 'Man',
-    age: 32,
-    address: 'Shanghai',
-  },
-  {
-    id: 10004,
-    name: 'Test4',
-    role: 'Designer',
-    sex: 'Women',
-    age: 24,
-    address: 'Shanghai',
-  },
-])
-
-const gridOptions = reactive<VxeGridProps<UserVO>>({
+const gridOptions = reactive<VxeGridProps>({
   border: true,
+  showHeaderOverflow: true,
+  showOverflow: true,
+  keepSource: true,
+  id: 'full_edit_1',
+  height: 600,
+  rowConfig: {
+    keyField: 'id',
+    isHover: true,
+  },
+  columnConfig: {
+    resizable: true,
+  },
+  customConfig: {
+    storage: true,
+    checkMethod({ column }) {
+      if (['nickname', 'role'].includes(column.field)) {
+        return false
+      }
+      return true
+    },
+  },
+  printConfig: {
+    columns: [
+      { field: 'name' },
+      { field: 'email' },
+      { field: 'nickname' },
+      { field: 'age' },
+      { field: 'amount' },
+    ],
+  },
+  sortConfig: {
+    trigger: 'cell',
+    remote: true,
+  },
+  filterConfig: {
+    remote: true,
+  },
+  pagerConfig: {
+    pageSize: 10,
+    pageSizes: [5, 10, 15, 20, 50, 100, 200, 500, 1000],
+  },
+  formConfig: {
+    titleWidth: 100,
+    titleAlign: 'right',
+    items: [
+      {
+        field: 'name',
+        title: 'app.body.label.name',
+        span: 8,
+        titlePrefix: {
+          message: 'app.body.valid.rName',
+          icon: 'vxe-icon-question-circle-fill',
+        },
+        itemRender: { name: '$input', props: { placeholder: '请输入名称' } },
+      },
+      {
+        field: 'email',
+        title: '邮件',
+        span: 8,
+        titlePrefix: {
+          useHTML: true,
+          message:
+            '点击链接：<a class="link" href="https://vxetable.cn" target="_blank">vxe-table官网</a>',
+          icon: 'vxe-icon-question-circle-fill',
+        },
+        itemRender: { name: '$input', props: { placeholder: '请输入邮件' } },
+      },
+      {
+        field: 'nickname',
+        title: '昵称',
+        span: 8,
+        itemRender: { name: '$input', props: { placeholder: '请输入昵称' } },
+      },
+      {
+        field: 'role',
+        title: '角色',
+        span: 8,
+        folding: true,
+        itemRender: { name: '$input', props: { placeholder: '请输入角色' } },
+      },
+      {
+        field: 'sex',
+        title: '性别',
+        span: 8,
+        folding: true,
+        titleSuffix: {
+          message: '注意，必填信息！',
+          icon: 'vxe-icon-question-circle-fill',
+        },
+        itemRender: { name: '$select', options: [] },
+      },
+      {
+        field: 'age',
+        title: '年龄',
+        span: 8,
+        folding: true,
+        itemRender: {
+          name: '$input',
+          props: {
+            type: 'number',
+            min: 1,
+            max: 120,
+            placeholder: '请输入年龄',
+          },
+        },
+      },
+      {
+        span: 24,
+        align: 'center',
+        collapseNode: true,
+        itemRender: {
+          name: '$buttons',
+          children: [
+            {
+              props: {
+                type: 'submit',
+                content: 'app.body.label.search',
+                status: 'primary',
+              },
+            },
+            { props: { type: 'reset', content: 'app.body.label.reset' } },
+          ],
+        },
+      },
+    ],
+  },
+  toolbarConfig: {
+    buttons: [
+      { code: 'insert_actived', name: t('message.button.add') },
+      { code: 'delete', name: '直接删除' },
+      { code: 'mark_cancel', name: '删除/取消' },
+      { code: 'save', name: t('message.button.save'), status: 'success' },
+    ],
+    refresh: true,
+    import: true,
+    export: true,
+    print: true,
+    zoom: true,
+    custom: true,
+  },
+  proxyConfig: {
+    seq: true, // 启用动态序号代理，每一页的序号会根据当前页数变化
+    sort: true, // 启用排序代理，当点击排序时会自动触发 query 行为
+    filter: true, // 启用筛选代理，当点击筛选时会自动触发 query 行为
+    form: true, // 启用表单代理，当点击表单提交按钮时会自动触发 reload 行为
+    // 对应响应结果 { result: [], page: { total: 100 } }
+    props: {
+      result: 'result', // 配置响应结果列表字段
+      total: 'page.total', // 配置响应结果总页数字段
+    },
+    // 只接收Promise，具体实现自由发挥
+    ajax: {
+      // 当点击工具栏查询按钮或者手动提交指令 query或reload 时会被触发
+      // query: ({ page, sorts, filters, form }) => {
+      //   const queryParams: any = Object.assign({}, form)
+      //   // 处理排序条件
+      //   const firstSort = sorts[0]
+      //   if (firstSort) {
+      //     queryParams.sort = firstSort.field
+      //     queryParams.order = firstSort.order
+      //   }
+      //   // 处理筛选条件
+      //   filters.forEach(({ field, values }) => {
+      //     queryParams[field] = values.join(',')
+      //   })
+      //   // 接口处理数据
+      //   return []
+      // },
+      // 当点击工具栏删除按钮或者手动提交指令 delete 时会被触发
+      delete: ({ body }) => {
+        // 接口处理数据
+        return null
+      },
+      // 当点击工具栏保存按钮或者手动提交指令 save 时会被触发
+      save: ({ body }) => {
+        // 接口处理数据
+        return null
+      },
+    },
+  },
   columns: [
-    { type: 'seq', width: 50 },
-    { field: 'name', title: 'Name', slots: { default: 'name' } },
-    { field: 'sex', title: 'Sex', showHeaderOverflow: true },
-    { field: 'address', title: 'Address', showOverflow: true },
+    { type: 'checkbox', title: 'ID', width: 120 },
+    {
+      field: 'name',
+      title: 'Name',
+      sortable: true,
+      titlePrefix: { message: '名称必须填写！' },
+      editRender: { name: 'input', attrs: { placeholder: '请输入名称' } },
+    },
+    {
+      field: 'role',
+      title: 'Role',
+      sortable: true,
+      titlePrefix: {
+        useHTML: true,
+        content:
+          '点击链接：<a class="link" href="https://vxetable.cn" target="_blank">vxe-table官网</a>',
+      },
+      filters: [
+        { label: '前端开发', value: '前端' },
+        { label: '后端开发', value: '后端' },
+        { label: '测试', value: '测试' },
+        { label: '程序员鼓励师', value: '程序员鼓励师' },
+      ],
+      filterMultiple: false,
+      editRender: { name: 'input', attrs: { placeholder: '请输入角色' } },
+    },
+    {
+      field: 'email',
+      title: 'Email',
+      width: 160,
+      editRender: { name: '$input', props: { placeholder: '请输入邮件' } },
+    },
+    {
+      field: 'nickname',
+      title: 'Nickname',
+      editRender: { name: 'input', attrs: { placeholder: '请输入昵称' } },
+    },
+    {
+      field: 'sex',
+      title: 'Sex',
+      filters: [
+        { label: '男', value: '1' },
+        { label: '女', value: '0' },
+      ],
+      editRender: {
+        name: '$select',
+        options: [],
+        props: { placeholder: '请选择性别' },
+      },
+    },
+    {
+      field: 'age',
+      title: 'Age',
+      visible: false,
+      sortable: true,
+      editRender: {
+        name: '$input',
+        props: { type: 'number', min: 1, max: 120 },
+      },
+    },
+    {
+      field: 'amount',
+      title: 'Amount',
+      formatter({ cellValue }) {
+        return cellValue
+          ? `￥${XEUtils.commafy(XEUtils.toNumber(cellValue), { digits: 2 })}`
+          : ''
+      },
+      editRender: {
+        name: '$input',
+        props: { type: 'float', digits: 2, placeholder: '请输入数值' },
+      },
+    },
+    {
+      field: 'updateDate',
+      title: 'Update Date',
+      width: 160,
+      visible: false,
+      sortable: true,
+      formatter({ cellValue }) {
+        return XEUtils.toDateString(cellValue, 'yyyy-MM-dd HH:ss:mm')
+      },
+    },
+    {
+      field: 'createDate',
+      title: 'Create Date',
+      width: 160,
+      visible: false,
+      sortable: true,
+      formatter({ cellValue }) {
+        return XEUtils.toDateString(cellValue, 'yyyy-MM-dd')
+      },
+    },
   ],
-  data: [
-    {
-      id: 10001,
-      name: 'Test1',
-      role: 'Develop',
-      sex: 'Man',
-      age: 28,
-      address: 'test abc',
+  importConfig: {
+    remote: true,
+    types: ['xlsx'],
+    modes: ['insert'],
+    // 自定义服务端导入
+    importMethod({ file }) {
+      const $grid = xGrid.value
+      const formBody = new FormData()
+      formBody.append('file', file)
+      // 接口处理数据
+      return null
     },
-    {
-      id: 10002,
-      name: 'Test2',
-      role: 'Test',
-      sex: 'Women',
-      age: 22,
-      address: 'Guangzhou',
+  },
+  exportConfig: {
+    remote: true,
+    types: ['xlsx'],
+    modes: ['current', 'selected', 'all'],
+    // 自定义服务端导出
+    exportMethod({ options }) {
+      const $grid = xGrid.value
+      const proxyInfo = $grid.getProxyInfo()
+      // 传给服务端的参数
+      const body = {
+        filename: options.filename,
+        sheetName: options.sheetName,
+        isHeader: options.isHeader,
+        original: options.original,
+        mode: options.mode,
+        pager: proxyInfo ? proxyInfo.pager : null,
+        ids:
+          options.mode === 'selected'
+            ? options.data.map((item) => item.id)
+            : [],
+        fields: options.columns.map((column) => {
+          return {
+            field: column.field,
+            title: column.title,
+          }
+        }),
+      }
+      // 开始服务端导出
+      return null
     },
-    {
-      id: 10003,
-      name: 'Test3',
-      role: 'PM',
-      sex: 'Man',
-      age: 32,
-      address: 'Shanghai',
-    },
-    {
-      id: 10004,
-      name: 'Test4',
-      role: 'Designer',
-      sex: 'Women',
-      age: 24,
-      address: 'Shanghai',
-    },
-  ],
+  },
+  checkboxConfig: {
+    labelField: 'id',
+    reserve: true,
+    highlight: true,
+    range: true,
+  },
+  editRules: {
+    name: [
+      { required: true, message: 'app.body.valid.rName' },
+      { min: 3, max: 50, message: '名称长度在 3 到 50 个字符' },
+    ],
+    email: [{ required: true, message: '邮件必须填写' }],
+    role: [{ required: true, message: '角色必须填写' }],
+  },
+  editConfig: {
+    trigger: 'click',
+    mode: 'row',
+    showStatus: true,
+  },
+})
+
+onMounted(() => {
+  const sexList = [
+    { label: '女', value: '0' },
+    { label: '男', value: '1' },
+  ]
+  const { formConfig, columns } = gridOptions
+  if (columns) {
+    const sexColumn = columns[5]
+    if (sexColumn && sexColumn.editRender) {
+      sexColumn.editRender.options = sexList
+    }
+  }
+  if (formConfig && formConfig.items) {
+    const sexItem = formConfig.items[4]
+    if (sexItem && sexItem.itemRender) {
+      sexItem.itemRender.options = sexList
+    }
+  }
 })
 </script>
-
 <style scoped lang='scss'>
 </style>
